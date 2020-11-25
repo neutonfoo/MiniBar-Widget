@@ -7,6 +7,10 @@ const options = {
   top: "20px",
   left: "420px",
   width: "600px",
+
+  // Refer to https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  timezone: "US/Pacific",
+  city: "Los Angeles",
 };
 
 let lastWeatherUpdate = 0;
@@ -14,7 +18,7 @@ let temp = 0;
 let weather = "";
 
 export const command = dispatch => {
-  run('date "+%A %B %d %Y %T"').then(response => {
+  run(`TZ=":${options.timezone}" date "+%A %B %d %Y %T"`).then(response => {
     // console.log(response);
     return dispatch({
       type: "DATE_UPDATE",
@@ -29,7 +33,7 @@ export const command = dispatch => {
     lastWeatherUpdate = Date.now();
 
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=Los+Angeles&units=metric&appid=${config.OPENWEATHERMAP_APIKEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${options.city}&units=metric&appid=${config.OPENWEATHERMAP_APIKEY}`
     ).then(response => {
       return dispatch({
         type: "WEATHER_UPDATE",
@@ -125,8 +129,8 @@ export const render = ({ warning, day, month, dayNum, year, time }) => {
         integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
         crossOrigin="anonymous"
       />
-      <i className={`far fa-calendar ${yellow}`}></i> {day}, {month} {dayNum}{" "}
-      <i className={`far fa-clock ${green}`}></i> {time}{" "}
+      {options.city} <i className={`far fa-calendar ${yellow}`}></i> {day},{" "}
+      {month} {dayNum} <i className={`far fa-clock ${green}`}></i> {time}{" "}
       <i className={`fas fa-thermometer-half ${red}`}></i> {temp}&deg;C{" "}
       <i className={`fa fa-cloud ${blue}`}></i> {weather}
     </div>
