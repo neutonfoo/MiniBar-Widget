@@ -63,7 +63,7 @@ export const className = {
 const containerClassName = css({
   color: "rgba(255, 255, 255)",
   fontFamily: "PT Mono",
-  fontSize: "10pt",
+  fontSize: "13px",
   textAlign: "center",
 });
 

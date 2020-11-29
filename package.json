@@ -3,5 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {}
+  "author": {
+    "name": "Neuton Foo",
+    "email": "neuton.foo@gmail.com.com",
+    "url": "https://neutonfoo.com"
+  }
 }
