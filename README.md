@@ -1,6 +1,6 @@
 # MiniBar
 
-![MiniBar](screenshot.png)
+![MiniBar-Widget](screenshot.png)
 
 ## Installation
 
